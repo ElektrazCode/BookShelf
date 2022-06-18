@@ -13,13 +13,13 @@
     padding: 0;
 }
 body{
-    width:100vw;
-    height:100vh;
+    width:100%;
+    height:100%;
 }
 header{
     height:15%;
     background: rgba(46, 96, 87, 0.8);
-    border: 2px solid rgba(46, 96, 87, 0.8);
+    border: 3px solid rgba(46, 96, 87, 0.8);
     border-radius: 30px;
     padding: 1em;
     margin: 1em 1em 0 1em;
@@ -31,43 +31,36 @@ h1{
     text-shadow: 2px -2px 2px rgba(161, 41, 24, 0.9);
 }
 nav{
-    margin: 0 1em;
-    display: inline-block;
-    width:200px;
-    height:85%;
-}
-nav a{
-    opacity:0;
-    padding: 20px 40px;
-    border: 1px solid red;
-}
-div{
-    background: url("images/Menu.png") 0 0 no-repeat;
-    background-size: contain;
-    width: 100%;
-    height: 100%;
-}
-ul{
-    padding-top:15%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+}
+main{
+    display: flex;
     justify-content: space-around;
-    align-items: center;
-    list-style-type: none;
-    height: 78%;
+    align-items: flex-end;
+}
+
+.banner{
+    margin-left: 15%;
+    width: 30%;
+    z-index:1;
+}
+.explore{
+    margin-left: 22%;
+}
+.bulb{
+    width: 6%;
+    position: absolute;
+    left:1.5em;
+    top:15%;
+    z-index:-1;
 }
 .bookcase{
-    position: absolute;
-    top:17.5%;
-    right:1em;
-    width:75%;
+    width:65%;
+    z-index:-1;
 }
-main a{
-    position: absolute;
-    opacity:0;
-    top: 28%;
-    right: 28%;
-    padding: 25px 60px;
-    border: 1px solid red;
-    z-index: 1;
+.desk{
+    width: 25%;
+    z-index:-1;
+
 }
