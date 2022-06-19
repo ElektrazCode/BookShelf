@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1 align="center">BookShelf</h1>
+    </header>
+    <nav>
+        <img class="bulb" src="/images/Bulb.png">
+        <div><a href=""><img class="banner help" src="/images/HelpDesk.png" alt="Find books"></a></div>
+        <div><a href=""><img class="banner explore" src="/images/Explore.png" alt="Explore Books"></a></div>
+    </nav>
+    <main>
+        <section>
+            <form action="/books" method="POST">
+                <input type="text" placeholder="title" name="title">
+                <input type="text" placeholder="author" name="author">
+                <input type="text" placeholder="date" name="date">
+                <input type="text" placeholder="pages" name="pages">
+                <input type="text" placeholder="synopsis" name="synopsis">
+                <button type="submit">Add Book</button>
+                <!-- <button type="submit">Find Book</button> -->
+            </form>
+            <img class="desk" src="/images/Desk.jpg" alt="Desk">
+        </section>
+        <section class="list">
+            <h2>Books List</h2>
+            <ul class="books">
+                <% for(var i=0; i<books.length; i++) {%>
+                    <li class="book">
+                        <h3><%= books[i].title %></h3>
+                        <h5><%= books[i].author %> (<%= books[i].date %>)</h5>
+                        <p><%= books[i].synopsis %></p></br>
+                    </li>
+                <% }%>
+            </ul>
+        </section>
+        <img class="bookcase" src="/images/Bookcase.jpg" alt ="Bookcase"> 
+    </main>
+    <script src="/main.js"></script>
+</body>
+</html>

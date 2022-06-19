@@ -28,6 +28,7 @@ MongoClient.connect(connectionStr)
         const db = client.db('bookshelf-books');
         const booksCollection = db.collection('books');
 
+        app.set('view engine', 'ejs');
         app.use(express.static('public'));
         app.use(bodyParser.urlencoded({extended: true}));
         app.listen(PORT, ()=> console.log(`Server is running on ${PORT}! You better go catch it!`));
@@ -35,10 +36,13 @@ MongoClient.connect(connectionStr)
         app.get('/', (request, response) => {
 
             booksCollection.find().toArray()
-                .then(results => console.log(results))
+                .then(results => {
+                    response.render('index.ejs', {books: results});
+                })
                 .catch(error=> console.error(error))
                 
-            response.sendFile(__dirname + '/index.html');
+            // response.sendFile(__dirname + '/index.html');
+            
         })
         
         app.get('/api', (request, response) => {
