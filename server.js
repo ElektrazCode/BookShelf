@@ -56,7 +56,7 @@ MongoClient.connect(connectionStr)
                 response.json(books[bookName]);
             }
             else
-                response.json({'error':'Book Missing!'});
+                response.json({'error':'Book is Not on Shelf!'});
         })
         
         app.post('/books', (request, response)=>{
