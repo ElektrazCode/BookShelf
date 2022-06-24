@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { ConnectionClosedEvent } = require('mongodb');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const connectionStr = 'mongodb+srv://moi:tusaisquoi@cluster0.zgxesci.mongodb.net/?retryWrites=true&w=majority';
@@ -31,6 +32,7 @@ MongoClient.connect(connectionStr)
         app.set('view engine', 'ejs');
         app.use(express.static('public'));
         app.use(bodyParser.urlencoded({extended: true}));
+        app.use(bodyParser.json());
         app.listen(PORT, ()=> console.log(`Server is running on ${PORT}! You better go catch it!`));
         
         app.get('/', (request, response) => {
@@ -44,7 +46,7 @@ MongoClient.connect(connectionStr)
             // response.sendFile(__dirname + '/index.html');
             
         })
-        
+
         app.get('/api', (request, response) => {
             response.json(books);
         })
@@ -67,7 +69,38 @@ MongoClient.connect(connectionStr)
             })
             .catch(error=>console.error(error))
         })
+
+        app.put('/books', (request, response) => {
+            booksCollection.findOneAndUpdate(
+                {title: ''},
+                {
+                    $set: {
+                        title: request.body.title,
+                        author: request.body.author,
+                        date: request.body.date,
+                        pages: request.body.pages,
+                        synopsis: request.body.synopsis
+                    }
+                },
+                {
+                    upsert: true
+                }
+            )
+            .then(result => response.json('Success'))
+            .catch(error => console.error(error))
+        })
        
+        app.delete('/books', (request, response) => {
+            booksCollection.deleteOne(
+                { title: request.body.title}
+            )
+            .then(result => {
+                if (result.deletedCount === 0)
+                    return response.json('No books to delete!');
+                response.json('Deleted last book!');
+            })
+            .catch(error => console.error(error))
+        })
     })
     .catch(error=>console.error(error));
 

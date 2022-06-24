@@ -27,19 +27,25 @@
                 <button type="submit">Add Book</button>
                 <!-- <button type="submit">Find Book</button> -->
             </form>
-            <img class="desk" src="/images/Desk.jpg" alt="Desk">
+            <img class="desk" src="/images/desk.png" alt="Desk">
         </section>
         <section class="list">
+            <!-- <a class="close" href="">X</a> -->
             <h2>Books List</h2>
-            <ul class="books">
+            <table class="books">
+                <th>Books</th>
+                <th>Actions</th>
                 <% for(var i=0; i<books.length; i++) {%>
-                    <li class="book">
-                        <h3><%= books[i].title %></h3>
-                        <h5><%= books[i].author %> (<%= books[i].date %>)</h5>
-                        <p><%= books[i].synopsis %></p></br>
-                    </li>
+                    <tr>
+                        <td class="books">
+                            <h3><%= books[i].title %></h3>
+                            <h5><%= books[i].author %> (<%= books[i].date %>)</h5>
+                            <p><%= books[i].synopsis %></p></br>     
+                        </td>
+                        <td><button id="edit"><img src="/images/edit.png" alt="edit"></button><button id="remove"><img src="/images/remove.png" alt="delete"></button></td>
+                    </tr>
                 <% }%>
-            </ul>
+                </table>
         </section>
         <img class="bookcase" src="/images/Bookcase.jpg" alt ="Bookcase"> 
     </main>
