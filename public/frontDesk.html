@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/style.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <h1 align="center">BookShelf</h1>
+        </header>
+        <nav>
+            <img class="bulb" src="/images/Bulb.png">
+            <div><a href="/frontDesk.html"><img class="banner help" src="/images/HelpDesk.png" alt="Find books"></a></div>
+            <div><a href="/explore.ejs"><img class="banner explore" src="/images/Explore.png" alt="Explore Books"></a></div>
+        </nav>
+        <main>
+            <section class-="frontDesk">
+                <form action="/books" method="POST">
+                    <input type="text" placeholder="title" name="title" id="title">
+                    <input type="text" placeholder="author" name="author" id="author">
+                    <input type="text" placeholder="date" name="date" id="date">
+                    <input type="text" placeholder="pages" name="pages" id="pages">
+                    <input type="text" placeholder="synopsis" name="synopsis" id="synopsis">
+                    <button id="add" type="submit">Add Book</button>
+                    <button id="find">Find Book</button>
+                </form>
+                <img class="desk" src="/images/desk.png" alt="Desk">
+            </section>
+        </main>
+        <script src="/main.js"></script>
+    </body>
+</html>

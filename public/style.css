@@ -62,7 +62,7 @@ section{
     justify-content: flex-end;
     align-items: center;
 }
-section:first-child{
+.frontDesk{
     width: 35%;
 }
 form{
@@ -96,13 +96,12 @@ input, button{
 } */
 .list{
     margin: 0 1em;
-    width: 65%;
+    width: 75vw;
     background: rgba(46, 96, 87, 0.9);
     border: 3px solid rgba(46, 96, 87, 0.9);
     border-radius: 30px;
     color: white;
     position: absolute;
-    right: 0;
     top: 35%;
     z-index: 2;
     padding: 5%;

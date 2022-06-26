@@ -1,35 +1,33 @@
 const exploreBtn = document.querySelector(".explore");
-const closeBtn = document.querySelector(".close");
 const updateBtn = document.querySelectorAll("#edit");
 const removeBtn = document.querySelectorAll("#remove");
+const findBtn = document.querySelector("#find");
 const listWindow = document.querySelector('.list');
-// exploreBtn.addEventListener('click', listAllBooks);
-// closeBtn.addEventListener('click', closeList);
+
 Array.from(updateBtn).forEach(btn => btn.addEventListener('click', updateBook));
 Array.from(removeBtn).forEach(btn => btn.addEventListener('click', removeBook));
-console.log('We\'re in');
-// function listAllBooks(){
-//     listWindow.style.display = 'block';
-// }
+findBtn.addEventListener('click', findBook);
 
-// function listAllBooks(){
-//     console.log("Explore Button has been clicked!");
-//     fetch('/books',{
-//         method: 'get'
-//         // headers: {'Content-Type': 'application/json'}
-//     })
-//     .then(results => {
-//         conosle.log(results.json());
-//     })
-// }
+function findBook(){
+    console.log("Find Button has been clicked!");
+    const title = document.querySelector('#title');
+    fetch(`/api/${title}`)
+        .then(response => {
+            console.log("Hi");
+            console.log(response.json());
+        })
+        .then(data => console.log(data))
+        .catch(error => console.error(error))
+}
 
 function removeBook(){
     console.log("Remove Button has been clicked!");
+    const book = this.parentNode.parentNode.querySelector('h3').textContent;
     fetch('/books',{
         method: 'delete',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            title:'Hola'
+            title: book
         })
     })
     .then(results => {
@@ -41,24 +39,20 @@ function removeBook(){
 }
 
 function updateBook(){
-    console.log("Edit Button has been clicked!");
+    console.log("Update Button has been clicked!");
+    const book = this.parentNode.parentNode.querySelector('h3').textContent;
+
     fetch('/books',{
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            title:'Hola',
-            author:'Me',
-            date:'today',
-            pages:'1',
-            synopsis: 'testing'
+            title: book
         })
     })
     .then(results => {
         if (results.ok) return results.json();
     })
-    .then(response => window.location.reload(true))
+    .then(data=>{
+        window.location.reload();
+    })
 }
-
-// function closeList(){
-//     listWindow.style.display = 'none';
-// }
