@@ -19,14 +19,20 @@
         <main>
             <section class-="frontDesk">
                 <form action="/books" method="POST">
+                    <label>Title</label>    
                     <input type="text" placeholder="title" name="title" id="title">
+                    <label>Author</label>
                     <input type="text" placeholder="author" name="author" id="author">
+                    <label>Date</label>
                     <input type="text" placeholder="date" name="date" id="date">
+                    <label>Pages</label>
                     <input type="text" placeholder="pages" name="pages" id="pages">
-                    <input type="text" placeholder="synopsis" name="synopsis" id="synopsis">
+                    <label>Synopsis</label>
+                    <textarea placeholder="synopsis" name="synopsis" id="synopsis" rows="5"></textarea>
                     <button id="add" type="submit">Add Book</button>
-                    <button id="find">Find Book</button>
                 </form>
+                    <button id="find">Find Book</button>
+                    <button id="update">Update Book</button>
                 <img class="desk" src="/images/desk.png" alt="Desk">
             </section>
         </main>

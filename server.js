@@ -73,32 +73,26 @@ MongoClient.connect(connectionStr)
         app.put('/books', (request, response) => {
             console.log(request.body.title);
             booksCollection.findOneAndUpdate(
-                {title: request.body.title}
+                {  
+                    title: request.body.title,
+                },
+                {
+                    $set: {
+                        title: request.body.title,
+                        author: request.body.author,
+                        date: request.body.date,
+                        pages: request.body.pages,
+                        synopsis: request.body.synopsis
+                    }
+                },
+                {
+                    upsert: true
+                }
             )
-                .then(results => {
-                    response.rediect('/frontDesk.html', {results});
+            .then(results => {
+                response.redirect('/frontDesk.html');
                 })
-                .catch(error=> console.error(error))  
-            // booksCollection.find(
-            //     {title: request.body.title}
-            // )
-            // booksCollection.find(
-            //     {title: request.body.title},
-            //     {
-            //         $set: {
-            //             title: request.body.title,
-            //             author: request.body.author,
-            //             date: request.body.date,
-            //             pages: request.body.pages,
-            //             synopsis: request.body.synopsis
-            //         }
-            //     },
-            //     {
-            //         upsert: true
-            //     }
-            // )
-            // .then(result => result.json())
-            // .catch(error => console.error(error))
+            .catch(error=> console.error(error))  
         })
        
         app.delete('/books', (request, response) => {
