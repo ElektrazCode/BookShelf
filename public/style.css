@@ -95,7 +95,6 @@ input, textarea, button{
 }
 .bookcase{
     width:65%;
-    opacity: 0.5;
     z-index:-1;
 }
 /* main{
