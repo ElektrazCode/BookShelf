@@ -39,7 +39,6 @@ MongoClient.connect(connectionStr)
         
         app.get('/api/:bookName', (request, response) =>{
             const bookTitle = request.params.bookName.toLowerCase();
-            console.log(bookTitle);
             booksCollection.find().toArray()
             .then(results => {
                 const book = results.filter(obj => obj.title.toLowerCase() === bookTitle);
@@ -51,7 +50,6 @@ MongoClient.connect(connectionStr)
         })
         // app.get('/books', (request, response) =>{
         //     const bookTitle = request.body.title.toLowerCase();
-        //     console.log(bookTitle);
         //     booksCollection.find().toArray()
         //     .then(results => {
         //         const book = results.filter(obj => obj.title.toLowerCase() === bookTitle);
