@@ -1,20 +1,30 @@
 const exploreBtn = document.querySelector(".explore");
 const updateBtn = document.querySelectorAll("#update");
 const removeBtn = document.querySelectorAll("#remove");
-const findBtn = document.querySelector("#find");
 const listWindow = document.querySelector('.list');
 
 Array.from(updateBtn).forEach(btn => btn.addEventListener('click', updateBook));
 Array.from(removeBtn).forEach(btn => btn.addEventListener('click', removeBook));
-findBtn.addEventListener('click', findBook);
+
+if (window.location.pathname === '/frontDesk.html'){
+    window.onload = function afterPageLoad(){
+        if (sessionStorage.getItem('title'))
+            findBook();
+    }
+    const findBtn = document.querySelector("#find");
+    findBtn.addEventListener('click', findBook);
+}
+if (window.location.pathname === '/explore.ejs'){
+    const editBtn = document.querySelectorAll("#edit");
+    Array.from(editBtn).forEach(btn => btn.addEventListener('click', editBook));
+}
 
 function findBook(){
-    const title = document.querySelector('#title').value;
-    console.log(title);
+    const title = document.querySelector('#title').value || sessionStorage.getItem('title');
+    
     fetch(`/api/${title}`)
         .then(response => response.json()
             .then (data=> { 
-                console.log(data[0]);
                 document.querySelector('#title').value = data[0].title;
                 document.querySelector('#author').value = data[0].author;
                 document.querySelector('#date').value = data[0].date;  
@@ -25,7 +35,6 @@ function findBook(){
 }
 
 function removeBook(){
-    console.log("Remove Button has been clicked!");
     const book = this.parentNode.parentNode.querySelector('h3').textContent;
     fetch('/books',{
         method: 'delete',
@@ -41,10 +50,24 @@ function removeBook(){
         window.location.reload();
     })
 }
+function editBook(){
 
+    sessionStorage.setItem('title', this.parentNode.parentNode.querySelector('h3').textContent);
+    const title = sessionStorage.getItem('title');
+    location.pathname = '/frontDesk.html';
+
+    fetch(`/api/${title}`)
+        .then(response => response.json()
+            .then (data=> { 
+                document.querySelector('#title').value = data[0].title;
+                document.querySelector('#author').value = data[0].author;
+                document.querySelector('#date').value = data[0].date;  
+                document.querySelector('#pages').value = data[0].pages;  
+                document.querySelector('#synopsis').value = data[0].synopsis; 
+        }))       
+        .catch(error => console.error(error))
+}
 function updateBook(){
-    console.log("Update Button has been clicked!");
-    // const book = this.parentNode.parentNode.querySelector('h3').textContent;
 
     fetch('/books',{
         method: 'put',
@@ -61,6 +84,7 @@ function updateBook(){
         if (results.ok) return results.json();
     })
     .then(data=>{
+        sessionStorage.removeItem('title');
         window.location.reload();
     })
 }

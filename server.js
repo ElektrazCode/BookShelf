@@ -22,7 +22,7 @@ MongoClient.connect(connectionStr)
         })
 
         app.get('/explore.ejs', (request, response) => {
-            booksCollection.find().toArray()
+            booksCollection.find().sort({title:1}).toArray()
                 .then(results => {
                     response.render('explore.ejs', {books: results});
                 })
@@ -71,7 +71,6 @@ MongoClient.connect(connectionStr)
         })
 
         app.put('/books', (request, response) => {
-            console.log(request.body.title);
             booksCollection.findOneAndUpdate(
                 {  
                     title: request.body.title,
