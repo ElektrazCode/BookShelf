@@ -5,6 +5,7 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const connectionStr = 'mongodb+srv://moi:tusaisquoi@cluster0.zgxesci.mongodb.net/?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 8000;
+const cors = require("cors");
 
 MongoClient.connect(connectionStr)
     .then(client => {
@@ -15,6 +16,7 @@ MongoClient.connect(connectionStr)
         app.use(express.static('public'));
         app.use(bodyParser.urlencoded({extended: true}));
         app.use(bodyParser.json());
+        app.use(cors());
         app.listen(PORT, ()=> console.log(`Server is running on ${PORT}! You better go catch it!`));
         
         app.get('/', (request, response) => {               
