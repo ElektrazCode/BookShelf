@@ -2,7 +2,8 @@
   "name": "bookshelf",
   "version": "1.0.0",
   "engines":{
-    "node": "18.2.0"
+    "node": "18.2.0",
+    "npm": "8.9.0"
   },
   "description": "An Api that holds all of my favorite books that I want to read ",
   "main": "index.js",
